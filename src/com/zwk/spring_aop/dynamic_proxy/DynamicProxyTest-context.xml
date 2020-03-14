@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+<!--  DI注解解析器  -->
+    <context:annotation-config></context:annotation-config>
+<!--  IOC注解解析器 -->
+    <context:component-scan base-package="com.zwk.spring_aop.dynamic_proxy"></context:component-scan>
+<!--  properties文档加载  -->
+    <context:property-placeholder location="classpath:com/zwk/spring_aop/dbProperties" ignore-unresolvable="false"></context:property-placeholder>
+<!--  添加druidDataSource Bean  -->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.userName}"></property>
+        <property name="password" value="${jdbc.userPassword}"></property>
+        <property name="initialSize" value="${jdbc.initialSize}"></property>
+    </bean>
+</beans>

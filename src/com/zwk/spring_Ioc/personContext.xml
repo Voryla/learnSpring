@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        1.beans属性中default-lazy-init=""  来控制整个xml文件是否延迟创建Bean对象
+        2.lazy-init来控制单个Bean对象是否延迟创建Bean对象 default=false
+        延迟加载在第一次getBean获取时加载bean对象
+    -->
+    <bean id="person" class="com.zwk.spring_Ioc.Person" lazy-init="false">
+        <property name="name" value="zwk"></property>
+        <property name="age" value="20"></property>
+    </bean>
+</beans>

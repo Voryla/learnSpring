@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!--  DI注解解析器  -->
+    <context:annotation-config></context:annotation-config>
+    <!--  IOC注解解析器 -->
+    <context:component-scan base-package="com.zwk.spring_aop.use_annotation_advice"></context:component-scan>
+    <!--    AOP注解解析器 proxy-target-class="true"使用cglib代理-->
+    <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy>
+
+    <!--  properties文档加载  -->
+    <context:property-placeholder location="classpath:com/zwk/spring_aop/dbProperties"
+                                  ignore-unresolvable="false"></context:property-placeholder>
+    <!--  添加druidDataSource Bean  -->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.userName}"></property>
+        <property name="password" value="${jdbc.userPassword}"></property>
+        <property name="initialSize" value="${jdbc.initialSize}"></property>
+    </bean>
+
+    <!--    &lt;!&ndash;  配置AOP xml 在什么地点+什么时机+做什么 &ndash;&gt;-->
+    <!--    &lt;!&ndash; 1.WHAT 做什么增强 即配置增强类的bean  &ndash;&gt;-->
+    <!--    <bean id="txManager" class="com.zwk.spring_aop.use_xml_aop_advice_advice.tx.MyTransactionManager"></bean>-->
+    <!--    &lt;!&ndash; proxy-target-class="true"该属性代表是否使用cglib代理类，默认是false=使用jdk代理类&ndash;&gt;-->
+    <!--    <aop:config proxy-target-class="true">-->
+    <!--        &lt;!&ndash;  配置aop切面  &ndash;&gt;-->
+    <!--        <aop:aspect ref="txManager">-->
+    <!--            &lt;!&ndash; 2.WHERE 在哪些包的哪些方法上做增强&ndash;&gt;-->
+    <!--            <aop:pointcut id="txPoint"-->
+    <!--                          expression="execution(* com.zwk.spring_aop.use_xml_aop_advice_advice.register_service.*Service.*(..) )"/>-->
+
+    <!--            &lt;!&ndash; 3.WHEN:在方法执行的什么时机做增强       &ndash;&gt;-->
+    <!--            &lt;!&ndash; 在执行发法前 &ndash;&gt;-->
+    <!--            <aop:before method="begin" pointcut-ref="txPoint"></aop:before>-->
+    <!--            &lt;!&ndash; 正常退出后执行 &ndash;&gt;-->
+    <!--            <aop:after-returning method="commit" pointcut-ref="txPoint"></aop:after-returning>-->
+    <!--            &lt;!&ndash;-->
+    <!--                发生异常后执行 throwing 异常方法可以接受Throwable类型的参数此时-->
+    <!--                throwing方法就要配置throwing属性 throwing="ex"其中"ex"对应异常方法中Throwable参数的名称-->
+    <!--            &ndash;&gt;-->
+    <!--            <aop:after-throwing method="rollback" pointcut-ref="txPoint" throwing="ex"></aop:after-throwing>-->
+    <!--            &lt;!&ndash; 最终增强无论如何都会执行该方法&ndash;&gt;-->
+    <!--            <aop:after method="close" pointcut-ref="txPoint"></aop:after>-->
+    <!--            &lt;!&ndash;around是上面时机的结合，使用try catch finally 可以达到在执行前执行后异常以及最终的效果，-->
+    <!--            如果使用了around就尽量注释掉普通的时机配置&ndash;&gt;-->
+    <!--            <aop:around method="aroundMethod" pointcut-ref="txPoint"></aop:around>-->
+    <!--        </aop:aspect>-->
+    <!--    </aop:config>-->
+</beans>

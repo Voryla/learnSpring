@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+       创建Bean 并且给bean添加初始化方法和销毁方法,在bean单例时spring可以自动的执行释放资源，
+       如果是多例时不会自动执行释放资源的操作,需要手动释放。 以上前提是在Spring测试中，如果不使用
+       Spring测试即使是单例模式也不会自动执行释放资源的操作，
+       那么需要使用ctx  ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("...xml")
+       的 ctx.registerShutdownHook();方法将spring设置为jvm的子线程，那么当jvm关闭时就会正常关闭。(推荐) 不过也可以使用
+       ctx.close()手动关闭。 切记要使用ClassPathXmlApplicationContext ctx=new ClassPathXmlApplicationContext("...xml")
+       如果使用父类引用指向子类对象则无法使用因为ApplicationContext类没有close和registerShutdownHook方法
+      -->
+    <bean id="myDatabase" class="com.zwk.spring_Ioc.bean_init_and_destroy.MyDatabase" init-method="open" destroy-method="close"></bean>
+    <!--Bean 的作用域问题 更改scope的值 常用单例singleton和多例prototype-->
+    <bean id="beanScope" class="com.zwk.spring_Ioc.create_bean_way.bean_scope.BeanScope" scope="prototype"></bean>
+    <!--方式一直接通过Bean构造器创建 需要Bean类有一个公共的无参构造器-->
+    <bean id="cat1" class="com.zwk.spring_Ioc.create_bean_way.way_1.Cat1"></bean>
+    <!--方式二通过静态工厂创建 class指向静态工厂类 factory-method指向创建对象的静态方法-->
+    <bean id="cat2" class="com.zwk.spring_Ioc.create_bean_way.way_2.Cat2Factory" factory-method="getInstance"></bean>
+    <!--实例工厂创建 先创建示例工厂的Bean 再创建一个Bean指定factory-bean再指定factory-method-->
+    <bean id="cat3Factory" class="com.zwk.spring_Ioc.create_bean_way.way_3.Cat3Factory"></bean>
+    <bean id="cat3" factory-bean="cat3Factory" factory-method="getInstance"></bean>
+    <!--实例工厂创建方式二，直接使用实现了FactoryBean的实例工厂来创建对象-->
+    <bean id="cat4" class="com.zwk.spring_Ioc.create_bean_way.way_4.Cat4Factory"></bean>
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--  添加属性占位符文件  -->
+    <context:property-placeholder location="classpath:com/zwk/practice_of_Ioc_and_DI_register/dbProperties"
+                                  system-properties-mode="NEVER"></context:property-placeholder>
+    <!--  配置DruidDataSource  -->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="username" value="${jdbc.userName}"></property>
+        <property name="password" value="${jdbc.userPassword}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+        <property name="initialSize" value="${jdbc.initialSize}"></property>
+    </bean>
+    <!--  配置DAO  -->
+    <bean id="IUserDAOImpl" class="com.zwk.practice_of_Ioc_and_DI_register.register_dao.IUserDAOImpl">
+        <property name="dataSource" ref="druidDataSource"></property>
+    </bean>
+    <!--  配置Service  -->
+    <bean id="IUserServiceImpl" class="com.zwk.practice_of_Ioc_and_DI_register.register_service.IUserServiceImpl">
+        <property name="dao" ref="IUserDAOImpl"></property>
+    </bean>
+    <!--
+        如果模拟Struts2的action配置bean的作用域(scope=prototype)要设置为多例
+
+        如果模拟SpringMVC Controller此时配置bean的作用域(scope=singleton)要设置为单例
+     -->
+    <bean id="userAction" class="com.zwk.practice_of_Ioc_and_DI_register.action.UserAction">
+        <property name="service" ref="IUserServiceImpl"></property>
+    </bean>
+</beans>

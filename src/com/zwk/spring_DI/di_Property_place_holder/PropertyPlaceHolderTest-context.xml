@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans.xsd
+                http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--设置普通数据库bean-->
+    <bean id="druidDataSource1" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/users?serverTimezone=GMT&amp;characterEncoding=utf-8&amp;useSSL=false"></property>
+        <property name="username" value="root"></property>
+        <property name="password" value="123456"></property>
+        <property name="initialSize" value="2"></property>
+    </bean>
+
+    <!-- 属性占位符方式
+        关联Properties文件 需要在beans中添加配置信息
+        xmlns:context="http://www.springframework.org/schema/context"
+        需要在xsi：schemaLocation中添加  注意这两句是在xsi：schemaLocationxsi：里的两个双引号直接
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+
+        当需要配置多个properties文件时使用如下方式 两个文件路径直接用逗号隔开
+         <context:property-placeholder ignore-unresolvable="true"
+       location="classpath:dbProperties,classpath:dbProperties"></context:property-placeholder>
+       如果想要单独设置使用如下方式 注意!!!每个配置都要添加ignore-unresolvable="true"
+       意思是忽略系统只使用第一个配置文件,因为spring读取时从上到下只读取第一个读取到的配置文件,
+       为了避免系统不读取使用该属性ignore-unresolvable="true",此属性默认值为false
+       <context:property-placeholder ignore-unresolvable="true"
+       location="classpath:dbProperties"></context:property-placeholder>
+       <context:property-placeholder ignore-unresolvable="true"
+       location="classpath:dbProperties"></context:property-placeholder>
+
+
+        在 ${}配置属性是不要使用username因为这是jvm的保留关键字代表着系统管理员，
+        也就是说不要在properties中使用username作为key但不推荐使用该方法
+        也可通过在context中设置该属性解决system-properties-mode="NEVER"推荐使用该方法
+    -->
+    <context:property-placeholder
+            system-properties-mode="NEVER"
+            location="classpath:com/zwk/spring_DI/di_Property_place_holder/dbProperties"></context:property-placeholder>
+    <!--使用<context:property-placeholder> 添加属性 方式如下-->
+    <bean id="druidDataSource2" class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.userName}"></property>
+        <property name="password" value="${jdbc.userPassword}"></property>
+        <property name="initialSize" value="${jdbc.initialSize}"></property>
+    </bean>
+</beans>

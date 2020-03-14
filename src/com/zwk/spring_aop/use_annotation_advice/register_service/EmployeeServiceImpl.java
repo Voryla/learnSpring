@@ -1,0 +1,21 @@
+package com.zwk.spring_aop.use_annotation_advice.register_service;
+
+import com.zwk.spring_aop.use_annotation_advice.register_dao.IEmployeeDAO;
+import com.zwk.spring_aop.use_annotation_advice.register_do.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
+public class EmployeeServiceImpl implements IEmployeeService {
+	@Autowired
+	private IEmployeeDAO employeeDAO;
+	@Override
+	public void save(Employee employee) {
+		employeeDAO.save(employee);
+	}
+
+	@Override
+	public void update(Employee employee) {
+		throw new IllegalArgumentException("故意出错");
+	}
+}

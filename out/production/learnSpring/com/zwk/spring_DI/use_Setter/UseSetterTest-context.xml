@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 此包为setter注入  注意！属性注入是在init方法之前完成的，所以需要注意的是，可能在init方法中重复复制-->
+
+    <!--
+        属性注入：常量类型 并不是真正的final关键字修饰的常量，而是可以作为对象创建即可初始化属性的一些值
+        当 引入xmlns:p="http://www.springframework.org/schema/p"时既可直接使用p:name="zwk"赋值,
+        尽量使用<property>这样更加明了
+    -->
+    <bean id="employee" class="com.zwk.spring_DI.use_Setter.di_finl_value.Employee" p:name="zwk">
+        <property name="age" value="19"></property>
+        <property name="salary" value="198.2"></property>
+    </bean>
+    <!--属性注入：对象类型 ref 就表示另外一个bean的id 类中要有set方法-->
+    <bean id="cat" class="com.zwk.spring_DI.use_Setter.di_object.Cat"></bean>
+    <bean id="person" class="com.zwk.spring_DI.use_Setter.di_object.Person">
+        <property name="cat" ref="cat">
+            <!--<ref bean="cat"></ref>-->
+        </property>
+    </bean>
+    <!--属性注入：集合类型 类中要有set方法-->
+    <bean id="collectionBean" class="com.zwk.spring_DI.use_Setter.di_collection.CollectionBean">
+        <property name="set">
+            <!--set类型-->
+            <set>
+                <value>set1</value>
+                <value>set2</value>
+            </set>
+        </property>
+        <property name="list">
+            <!--list类型-->
+            <list>
+                <value>list1</value>
+                <value>list2</value>
+            </list>
+        </property>
+        <property name="array">
+            <!--数组类型 list和数组相通，数组和list使用对方都ok-->
+            <array>
+                <value>array1</value>
+                <value>array2</value>
+            </array>
+        </property>
+        <property name="map">
+            <!--map类型-->
+            <map>
+                <entry key="key1" value="map1"></entry>
+                <entry key="key2" value="map2"></entry>
+            </map>
+        </property>
+        <property name="prop">
+            <!--
+            <props>
+                <prop key="key1">value1</prop>
+                <prop key="key2">value2</prop>
+            </props>
+            -->
+            <!--简便写法-->
+            <value>
+                key1=value1;
+                key2=value2;
+            </value>
+        </property>
+        <!--给集合中赋值对象-->
+        <property name="persons">
+            <array value-type="com.zwk.spring_DI.use_Setter.di_object.Person">
+                <!--内部bean 加不加id都无所谓外界均无法获得-->
+                <bean id="person2" class="com.zwk.spring_DI.use_Setter.di_object.Person">
+                    <property name="cat" ref="cat"></property>
+                </bean>
+                <!--内部bean-->
+                <bean class="com.zwk.spring_DI.use_Setter.di_object.Person">
+                    <property name="cat" ref="cat"></property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+</beans>

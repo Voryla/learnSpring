@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/spring-config.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/springs/sourceContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_test/someBeanContext.xml</file>
+          <file>file://$MODULE_DIR$/src/resource/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_Ioc/personContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/create_bean_way/createBeanTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_DI/DITest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_DI/use_Setter/UseSetterTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_DI/autowired/DITest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_DI/di_constructor/UseConstructorTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_DI/di_bean_tag_inheritance/BeanTagTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_DI/di_Property_place_holder/lib/PropertyPlaceHolderTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_DI/di_Property_place_holder/PropertyPlaceHolderTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_Ioc/create_bean_way/CreateBeanTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/practice_of_Ioc_and_DI_register/RegisterTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_annotation/annotation_autowired/AnnotationAutowired-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_annotation/annotation_autowired_useConfig/annotationAutowiredUseConfigTest.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_annotation/annotation_autowired_spring_test/AnnotationAutowiredUseValue-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_annotation/annotation_autowired_spring_test/use_component/AnnotationAutowiredUseComponent.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_annotation/use_scope_postConstruct_perDestroy/Test-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/practice_of_annotation_register/RegisterTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_aop/static_proxy/StaticProxyTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_aop/dynamic_proxy/StaticProxyTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_aop/dynamic_proxy/DynamicProxyTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_aop/use_xml_aop/StaticProxyTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_aop/use_annotation_advice/StaticProxyTest-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_aop/use_xml_aop_advice/APP-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_aop/use_annotation_advice/APP-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_dao/App-context.xml</file>
+          <file>file://$MODULE_DIR$/src/com/zwk/spring_annotation/use_scope_postConstruct_perDestroy/AnnotationTest-context.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="JUnit5.3" level="application" />
+    <orderEntry type="library" name="com.springsource.org.apache.commons.logging-1.1.1" level="project" />
+    <orderEntry type="library" name="druid-1.1.9" level="project" />
+    <orderEntry type="library" name="lombok" level="application" />
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+    <orderEntry type="library" name="com.springsource.org.aspectj.weaver-1.6.8.RELEASE" level="project" />
+    <orderEntry type="library" name="spring-jdbc-5.0.0.RELEASE" level="project" />
+    <orderEntry type="library" name="spring-tx-5.0.0.RELEASE" level="project" />
+  </component>
+</module>

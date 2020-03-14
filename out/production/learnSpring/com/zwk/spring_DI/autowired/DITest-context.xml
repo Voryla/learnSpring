@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="dog" class="com.zwk.spring_DI.autowired.Dog"></bean>
+    <!--
+    不推荐使用xml自动装配
+        autowire代表自动装配可以根据名称和类型和constructor(构造器) 默认是不装配
+        如果使用ByType和ByName需要提供属性的set方法，如果使用constructor构造器进行装配，则需要一个默认的无参构造
+        和其他带参构造器，spring会根据xml文档中现有的bean匹配适当的构造函数，使用构造器可以不创建set方法。
+    -->
+    <bean id="person" class="com.zwk.spring_DI.autowired.Person" autowire="constructor"></bean>
+</beans>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        使用构造器注入参数 index指定构造方法的第几个参数
+        index="0" type="java.lang.String"
+        <constructor-arg name="person" >
+            <null></null>
+        </constructor-arg>
+    -->
+    <bean id="employees" class="com.zwk.spring_DI.di_constructor.Employees">
+        <constructor-arg name="name" value="zwk"></constructor-arg>
+        <!--对象注入-->
+        <constructor-arg name="age" ref="age"></constructor-arg>
+        <constructor-arg name="salary" value="1548"></constructor-arg>
+        <constructor-arg name="list" ref="arrayList"></constructor-arg>
+    </bean>
+    <!--对象注入-->
+    <bean id="age" class="java.lang.Integer">
+        <constructor-arg name="value" value="17"></constructor-arg>
+    </bean>
+    <!--集合注入-->
+    <bean id="arrayList" class="java.util.ArrayList">
+        <constructor-arg name="c">
+            <list>
+                <value>1</value>
+                <value>2</value>
+                <!--内部bean-->
+                <bean class="java.lang.Integer">
+                    <constructor-arg name="value" value="3"></constructor-arg>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+</beans>

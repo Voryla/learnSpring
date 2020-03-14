@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--
+        如果两个bean有共同的初始值，可以将属性抽离出来使用
+        abstract="true"告诉spring不初始该bean对象
+        parent="beanTag"给bean设置使用哪一个标签
+    -->
+    <bean id="beanTag" abstract="true">
+        <property name="name" value="zwk"></property>
+        <property name="width" value="50"></property>
+    </bean>
+    <bean id="someOne1" class="com.zwk.spring_DI.di_bean_tag_inheritance.SomeOne1" parent="beanTag"></bean>
+    <bean id="someOne2" class="com.zwk.spring_DI.di_bean_tag_inheritance.SomeOne2" parent="beanTag"></bean>
+</beans>
